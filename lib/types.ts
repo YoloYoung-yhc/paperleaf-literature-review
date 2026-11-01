@@ -1,0 +1,9 @@
+export type Provider = { baseUrl: string; apiKey: string; model: string; bohrApiKey?:string };
+export type ReviewInput = { topic:string; language:'zh'|'en'; words:number; count:number; fromYear:number; toYear:number; requirements:string };
+export type Paper = { id:string; title:string; authors:string[]; year:number; journal:string; doi?:string; url:string; abstract:string; source:string; pmcid?:string; arxivId?:string; sources?:string[]; fullText?:string; fullTextUrl?:string };
+export type Evidence = { paperId:string; summary:string; quote:string; basis:'abstract'|'fulltext' };
+export type Paragraph = { text:string; citations:string[] };
+export type Section = { title:string; paragraphs:Paragraph[] };
+export type Review = { title:string; abstract:string; keywords:string[]; sections:Section[] };
+export type Job = { id:string; tokenHash:string; input:ReviewInput; status:'running'|'completed'|'failed'; stage:string; progress:number; createdAt:number; expiresAt:number; papers:Paper[]; evidence:Evidence[]; warnings:string[]; review?:Review; error?:string };
+export type PublicJob = Omit<Job,'tokenHash'>;
